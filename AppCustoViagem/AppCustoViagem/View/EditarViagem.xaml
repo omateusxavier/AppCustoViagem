@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppCustoViagem.View.EditarViagem"
+             Title="Editar Viagem">
+
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Text="Salvar" Clicked="Salvar" />-->
+        <ToolbarItem Text="Somar" Clicked="NovaSoma"/>
+        <ToolbarItem Text="Pedágios" Clicked="Pedagios"/>
+        <!--- <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_Somar" /> -->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame>
+                <Grid RowSpacing="0" RowDefinitions="*, *, *, *" ColumnDefinitions="Auto, *">
+                    <Label Grid.Column="0" 
+                           Grid.Row="0" 
+                           Grid.ColumnSpan="2" 
+                           Text="Viagem"
+                           Style="{StaticResource Titulo}" />
+
+                    <Label Grid.Column="0" Grid.Row="1" Text="Origem:" />
+                    <Entry Grid.Column="1" Grid.Row="1" x:Name="txt_origem" Text="{Binding Origem}"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Text="Destino:" />
+                    <Entry Grid.Column="1" Grid.Row="2" x:Name="txt_destino" Text="{Binding Destino}" />
+
+                    <Label Grid.Column="0" Grid.Row="3" Text="DistânciaZ:" />
+                    <Entry Grid.Column="1" Grid.Row="3" x:Name="txt_distancia" Text="{Binding Distancia}"/>
+                </Grid>
+            </Frame>
+            <!--
+            -->
+            <Frame>
+            <Grid RowSpacing="0" RowDefinitions="*, *, *" ColumnDefinitions="Auto, *">
+                <Label Grid.Column="0" 
+                           Grid.Row="0" 
+                           Grid.ColumnSpan="2" 
+                           Text="Custo"
+                           Style="{StaticResource Titulo}" />
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Km/L:" />
+                    <Entry Grid.Column="1" Grid.Row="1" x:Name="txt_km_litro" Placeholder="Eficiência do veículo em km/L" Text="{Binding Kml}"/>
+
+                <Label Grid.Column="0" Grid.Row="2" Text="Combustível:" />
+                    <Entry Grid.Column="1" Grid.Row="2" x:Name="txt_preco_combustivel" Placeholder="Preço do combustível em R$" Text="{Binding PrecoCombustivel}"/>
+            </Grid>
+            </Frame>
+
+            <Frame x:Name="frm_custo_viagem" >
+                <StackLayout>
+                    <Label Text="Custo da Viagem" Style="{StaticResource Titulo}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Combustível: " />
+                                    <Span x:Name="spn_custo_combustivel" TextColor="DarkRed" Text="{Binding TotalCombustivel, StringFormat='{}{0:c}'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label HorizontalOptions="CenterAndExpand" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Pedágios: " />
+                                    <Span x:Name="spn_custo_pedagios" TextColor="DarkRed" Text="{Binding TotalPedagio, StringFormat='{}{0:c}'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <Label x:Name="lbl_custo_viagem" FontSize="Title" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="ForestGreen" Text="{Binding ValorTotal, StringFormat='{}{0:c}'}"/>
+                </StackLayout>
+            </Frame>
+            <Button x:Name="btnSalvar" Clicked="Salvar" Text="Gravar" IsVisible="False" BackgroundColor="green" TextColor="#FFF"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

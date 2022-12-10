@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppCustoViagem.View.MinhasViagens"
+             Title="Minhas Viagens">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logo"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="txt_busca" 
+                       Placeholder="Busque por local de destino"
+                       TextChanged="txt_busca_TextChanged"/>
+
+            <RefreshView x:Name="ref_carregando" IsRefreshing="true">
+                <ListView x:Name="lst_minhas_viagens" ItemSelected="lst_minhas_viagens_ItemSelected_1">
+                    <ListView.Header>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="*, *, *, *, *">
+                            <Label Grid.Row="0" Grid.Column="0" Text="Origem" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="Destino"/>
+                            <Label Grid.Row="0" Grid.Column="2" Text="Combustível"/>
+                            <Label Grid.Row="0" Grid.Column="3" Text="Pedágios"/>
+                            <Label Grid.Row="0" Grid.Column="4" Text="Total Viagem" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    
+                                    <MenuItem Text="Remover" Clicked="Remover"/>
+                                    
+                                </ViewCell.ContextActions>
+
+                                <Grid RowDefinitions="Auto" ColumnDefinitions="*, *, *, *, *">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Origem}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Destino}"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding TotalCombustivel, StringFormat='{}{0:c}'}"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding ValorPedagios, StringFormat='{}{0:c}'}"/>
+                                    <Label Grid.Row="0" Grid.Column="4" Text="{Binding ValorTotal, StringFormat='{}{0:c}'}"/>
+                                </Grid>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RefreshView>
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
